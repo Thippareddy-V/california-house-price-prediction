@@ -85,17 +85,9 @@ average**.
 
 ## Architecture
 
-┌─────────────────┐ HTTP POST /predict ┌──────────────────┐
-│ Streamlit UI │ ───────────────────────────▶ │ Flask API │
-│ (app/app.py) │ ◀─────────────────────────── │ (api/main.py) │
-└─────────────────┘ JSON response └──────────────────┘
-│
-▼
-┌──────────────────────┐
-│ src/house_price/ │
-│ predict.py │
-│ → loads model.joblib │
-└──────────────────────┘
+![Alt text](docs/Architecture.png)
+
+
 
 
 The UI never touches the model directly — every prediction goes through the API, so the model
@@ -104,19 +96,51 @@ without duplication.
 
 ## Project Structure
 
-├── src/house_price/ # Core logic — data loading, training, prediction
-│ ├── config.py # Paths, constants, feature ranges, tuned hyperparameters
-│ ├── data.py # load_data(), get_X_y() — with a fallback data source
-│ ├── train.py # Trains XGBoost, saves model + metrics
-│ ├── predict.py # Loads model once (cached), exposes predict()
-│ └── evaluate.py # Shared MAE/RMSE/R² scoring function
-├── api/main.py # Flask REST API — /health, /predict, input validation
-├── app/app.py # Streamlit web interface
-├── models/v1/ # Trained model, feature list, metrics.json (versioned)
-├── notebooks/ # Exploration notebook — EDA, model comparison, tuning
-├── tests/ # pytest suite — data, prediction, and API tests
-├── .github/workflows/ci.yml # Runs tests automatically on every push
-├── Dockerfile # Containerizes the API
+california-house-price-prediction/
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+├── api/
+│   ├── __init__.py
+│   └── main.py
+│
+├── app/
+│   └── app.py
+│
+├── docs/
+│   └── image.png
+│
+├── models/
+│   └── v1/
+│       ├── model.joblib
+│       ├── feature_names.joblib
+│       └── metrics.json
+│
+├── notebooks/
+│   └── ...
+│
+├── src/
+│   ├── __init__.py
+│   └── house_price/
+│       ├── __init__.py
+│       ├── config.py
+│       ├── data.py
+│       ├── evaluate.py
+│       ├── predict.py
+│       └── train.py
+│
+├── tests/
+│   ├── __init__.py
+│   ├── test_api.py
+│   ├── test_data.py
+│   └── test_predict.py
+│
+├── .env.example
+├── .gitignore
+├── Dockerfile
+├── README.md
 └── requirements.txt
 
 
