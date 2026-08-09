@@ -93,11 +93,10 @@ average**.
 The UI never touches the model directly — every prediction goes through the API, so the model
 logic has one source of truth and could serve other clients (mobile app, another frontend)
 without duplication.
-
 ## Project Structure
 
+```text
 california-house-price-prediction/
-│
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
@@ -110,7 +109,7 @@ california-house-price-prediction/
 │   └── app.py
 │
 ├── docs/
-│   └── image.png
+│   └── architecture.png
 │
 ├── models/
 │   └── v1/
@@ -142,6 +141,7 @@ california-house-price-prediction/
 ├── Dockerfile
 ├── README.md
 └── requirements.txt
+```
 
 
 ## API Reference
