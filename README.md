@@ -10,7 +10,7 @@ API and a live web interface.
 
 **Live demo:** *(add your Streamlit Cloud link here once deployed)*
 
-![App Screenshot](docs/screenshot.png)
+![Alt text](docs/image.png)
 
 ---
 
