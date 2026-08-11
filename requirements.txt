@@ -6,3 +6,4 @@ flask
 streamlit
 requests
 pytest
+gunicorn
